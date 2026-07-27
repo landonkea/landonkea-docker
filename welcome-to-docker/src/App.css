@@ -1,0 +1,88 @@
+/* ".App" styles the main App component */
+.App {
+  /* "text-align: center" centers all text inside the App container */
+  text-align: center;
+}
+
+/* ".App-logo" styles an image logo (not currently used, but kept from the template) */
+.App-logo {
+  /* "height: 40vmin" makes the logo 40% of the smallest viewport dimension — responsive sizing */
+  height: 40vmin;
+  /* "pointer-events: none" makes the logo unclickable — you can't interact with it */
+  pointer-events: none;
+}
+
+/* ".App-header" styles the full-screen header that holds the congratulations message */
+.App-header {
+  /* "background-color: #003f8c" sets a dark blue background — this is Docker's brand blue color */
+  background-color: #003f8c;
+  /* "min-height: 100vh" makes the header at least as tall as the full viewport (100% of viewport height) */
+  min-height: 100vh;
+  /* "display: flex" enables Flexbox layout — makes it easy to center content */
+  display: flex;
+  /* "flex-direction: column" stacks children vertically (top to bottom) instead of side by side */
+  flex-direction: column;
+  /* "align-items: center" centers children horizontally within the flex container */
+  align-items: center;
+  /* "justify-content: center" centers children vertically — this is what puts everything in the middle of the screen */
+  justify-content: center;
+  /* "font-size: calc(10px + 2vmin)" makes font size responsive — it grows/shrinks based on viewport size */
+  font-size: calc(10px + 2vmin);
+  /* "color: white" makes all text inside the header white so it's readable against the dark blue background */
+  color: white;
+}
+
+/* ".App-link" styles clickable links (not currently used in the app) */
+.App-link {
+  /* "color: #61dafb" is a light blue color from the original Create React App template */
+  color: #61dafb;
+}
+
+/* ".fa-brands" styles the social media share icons (Twitter, LinkedIn, Reddit) */
+.fa-brands {
+  /* "padding: 20px" adds 20 pixels of space inside each icon — makes them bigger and easier to click */
+  padding: 20px;
+  /* "font-size: 30px" makes the icon symbols 30 pixels tall */
+  font-size: 30px;
+  /* "width: 50px" sets a fixed width so all icons are the same size */
+  width: 50px;
+  /* "margin: 10px" adds 10 pixels of space around each icon so they don't touch each other */
+  margin: 10px;
+  /* "text-align: center" centers the icon within its space */
+  text-align: center;
+  /* "text-decoration: none" removes the default underline that links usually have */
+  text-decoration: none;
+}
+
+/* ".fa-brands:hover" applies styles when the user hovers their mouse over a social media icon */
+.fa-brands:hover {
+  /* "opacity: 0.7" makes the icon slightly transparent on hover — creates a fade effect that signals it's clickable */
+  opacity: 0.7;
+}
+
+/* Twitter */
+/* ".fa-x-twitter" styles specifically the X/Twitter icon */
+.fa-x-twitter {
+  /* "background: #55acee" gives the icon a light blue background — matching Twitter's brand color */
+  background: #55acee;
+  /* "color: white" makes the X/Twitter symbol white so it's readable against the blue background */
+  color: white;
+}
+
+/* Linkedin */
+/* ".fa-linkedin" styles specifically the LinkedIn icon */
+.fa-linkedin {
+  /* "background: #55acee" gives LinkedIn the same blue background (could be changed to LinkedIn's actual blue #0077B5) */
+  background: #55acee;
+  /* "color: white" makes the LinkedIn symbol white */
+  color: white;
+}
+
+/* Reddit */
+/* ".fa-reddit" styles specifically the Reddit icon */
+.fa-reddit {
+  /* "background: #55acee" gives Reddit the same blue background (could be changed to Reddit's actual orange #FF5700) */
+  background: #55acee;
+  /* "color: white" makes the Reddit symbol white */
+  color: white;
+}

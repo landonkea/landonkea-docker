@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!-- "<html lang='en'>" tells the browser this is an HTML page written in English -->
+<html lang="en">
+
+<!-- "<head>" contains metadata about the page (not visible content) -->
+<head>
+    <!-- "UTF-8" supports all characters including emojis and special letters -->
+    <meta charset="UTF-8">
+    <!-- "viewport" makes the page responsive — it scales correctly on phones, tablets, and desktops -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- "X-UA-Compatible" ensures Internet Explorer uses the latest rendering engine -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- This is the text that appears in the browser tab -->
+    <title>Todo App</title>
+    <!-- "link rel='stylesheet'" loads Bootstrap CSS from a CDN (Content Delivery Network) — Bootstrap provides pre-built styles for buttons, layouts, etc. -->
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Loads Font Awesome icons so we can use icons like the trash can icon for delete buttons -->
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<!-- "<body>" contains all the visible content on the page -->
+<body>
+    <!-- "container m-5 p-2 rounded mx-auto bg-light shadow" are Bootstrap classes that style a centered, padded, rounded, light-colored box with a shadow -->
+    <div class="container m-5 p-2 rounded mx-auto bg-light shadow">
+        
+        <!-- App title section -->
+        <!-- "row m-1 p-4" creates a horizontal row with margin and padding -->
+        <div class="row m-1 p-4">
+            <!-- "col" is a Bootstrap column that takes up available space -->
+            <div class="col">
+                <!-- "p-1 h1 text-primary text-center" adds padding, makes text large and blue, and centers it -->
+                <div class="p-1 h1 text-primary text-center mx-auto display-inline-block">
+                    <!-- "<u>" underlines the text — this is the main title of the app -->
+                    <u>Todo App</u>
+                </div>
+            </div>
+        </div>
+            <!-- This row contains the input form where users type new tasks -->
+            <div class="row m-1 p-3">
+                <div class="col col-11 mx-auto">
+                    <!-- "method='POST' action='/'" means the form sends data to the home page using a POST request -->
+                    <form method="POST" action="/" autocomplete="off">
+                        <div class="row m-1 p-3">
+                            <div class="col col-11 mx-auto">
+                                <!-- This is the white rounded box containing the input field and button -->
+                                <div class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
+                                    <!-- "col" makes this input take up most of the width -->
+                                    <div class="col">
+                                        <!-- "form-control form-control-lg" makes a large Bootstrap-styled text input -->
+                                        <!-- "name='task'" is important — this is how the server knows which form field the text came from -->
+                                        <!-- "placeholder" shows gray hint text inside the input before you type -->
+                                        <input class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded" type="text" name="task" placeholder="Add new Task">
+                                    </div>
+                                    <!-- "col-auto px-0 mx-0 mr-2" makes this column just wide enough for the button -->
+                                    <div class="col-auto px-0 mx-0 mr-2">
+                                        <!-- "btn btn-primary" makes a blue Bootstrap button that submits the form when clicked -->
+                                        <button type="submit" class="btn btn-primary">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- "<hr>" draws a horizontal line to visually separate the form from the task list below -->
+                    <hr>
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- EJS template: "if(Object.keys(tasks).length > 0)" checks if there are any tasks to display -->
+                            <% if(Object.keys(tasks).length> 0) { %>
+                                <!-- "nav flex-column" creates a vertical list of tasks -->
+                                <ul class="nav flex-column">
+                                    <!-- EJS template: "tasks.forEach(todo =>" loops through every task and displays it -->
+                                    <% tasks.forEach(todo=> { %>
+                                        <!-- "nav-item" is a Bootstrap class for a single list item -->
+                                        <li class="nav-item">
+                                            <!-- "d-flex justify-content-between" puts the task text on the left and delete button on the right -->
+                                            <div class="d-flex justify-content-between py-1">
+                                                <div class="d-flex flex-row">
+                                                    <div>
+                                                        <!-- This displays the actual task text that was saved in the database -->
+                                                        <%= todo.task %>
+                                                            <!-- "text-muted" makes the text gray — shows when the task was created -->
+                                                            <p class="text-muted"><small>
+                                                                    <!-- "moment(todo.created_at).fromNow()" converts the date to a relative time like "5 minutes ago" -->
+                                                                    <%= moment(todo.created_at).fromNow() %>
+                                                                </small></p>
+                                                    </div>
+                                                </div>
+                                                <!-- "onclick='this.children[0].submit()'" is a clever trick — clicking the trash icon submits the hidden form to delete the task -->
+                                                <a href="javascript:;" onclick="this.children[0].submit()"
+                                                    class="text-danger">
+                                                    <!-- This hidden form submits a POST request to delete the task — it's hidden so you only see the trash icon -->
+                                                    <form method="POST" action="/todo/destroy">
+                                                        <!-- "type='hidden'" means this field is invisible — it just carries the task's unique ID (_id) -->
+                                                        <input type="hidden" name="_key" value="<%= todo._id %>" />
+                                                    </form>
+                                                    <!-- Font Awesome trash icon — the red delete button -->
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <!-- "})" ends the forEach loop in EJS -->
+                                        <% }) %>
+                                </ul>
+                                <!-- "else" — if there are no tasks, show this message instead -->
+                                <% } else { %>
+                                    <div class="text-center"><strong>Please add some task.</strong></div>
+                                    <!-- "}" closes the if/else block in EJS -->
+                                    <% }%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

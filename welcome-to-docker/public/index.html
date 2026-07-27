@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- "<html lang='en'>" tells the browser this page is in English — helps with accessibility and search engines -->
+<html lang="en">
+  <!-- "<head>" contains metadata about the page (not visible to users) -->
+  <head>
+    <!-- "charset='utf-8'" supports all characters and symbols — essential for emojis and special letters -->
+    <meta charset="utf-8" />
+    <!-- "rel='icon' href='%PUBLIC_URL%/favicon.ico'" sets the small icon in the browser tab -->
+    <!-- "%PUBLIC_URL%" is a Create React App placeholder that gets replaced with the actual URL at build time -->
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <!-- "viewport" makes the page responsive — it scales correctly on phones, tablets, and desktops -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- "theme-color" sets the color of the mobile browser's address bar — matches Docker's blue -->
+    <meta name="theme-color" content="#000000" />
+    <!-- "description" is metadata used by search engines and social media — describes what the page is about -->
+    <meta name="description" content="Your first Docker container" />
+    <!-- Loads Font Awesome 6.4.2 from a CDN — provides social media icons (Twitter, LinkedIn, Reddit) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <!-- This title shows in the browser tab and as the page title when shared on social media -->
+    <title>Welcome to Docker</title>
+  </head>
+  <!-- "<body>" contains all the visible content of the page -->
+  <body>
+    <!-- "<noscript>" shows this message only if JavaScript is disabled — React requires JavaScript to work -->
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- "<div id='root'> is where React mounts itself — React takes over this div and renders all components inside it -->
+    <!-- This is the bridge between the static HTML and the dynamic React application -->
+    <div id="root"></div>
+  </body>
+</html>

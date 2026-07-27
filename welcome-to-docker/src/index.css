@@ -1,0 +1,22 @@
+/* "body" styles the <body> element — the entire visible area of the web page */
+body {
+  /* "margin: 0" removes the default browser margin around the page — lets content go edge-to-edge */
+  margin: 0;
+  /* "font-family" sets the text font — it lists multiple fonts as fallbacks in case one isn't available on the user's computer */
+  /* "-apple-system" uses the default font on Apple devices, "BlinkMacSystemFont" for Chrome, etc. */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  /* "-webkit-font-smoothing: antialiased" makes text look smoother on macOS/iOS (less pixelated edges) */
+  -webkit-font-smoothing: antialiased;
+  /* "-moz-osx-font-smoothing: grayscale" does the same smoothing for Firefox on macOS */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* "code" styles <code> elements — used for displaying code snippets */
+code {
+  /* "font-family" uses a monospace font where every character takes the same width — makes code easier to read */
+  /* "source-code-pro, Menlo, Monaco, Consolas" are popular monospace fonts — "monospace" is the generic fallback */
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Roboto',
+    monospace;
+}

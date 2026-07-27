@@ -1,0 +1,58 @@
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Docker compose reference guide at
+# https://docs.docker.com/compose/compose-file/
+
+# Here the instructions define your application as two services called "todo-app" and "todo-database"
+# The service "todo-app" is built from the Dockerfile in the /app directory,
+# and the service "todo-database" uses the official MongoDB image 
+# from Docker Hub - https://hub.docker.com/_/mongo. 
+# You can add other services your application may depend on here.
+
+# "services:" tells Docker Compose to start multiple containers that work together
+services:
+  # "todo-app:" defines our Node.js/Express web application container
+  todo-app:
+    # "build:" tells Docker Compose to build this container from a Dockerfile instead of pulling a pre-made image
+    build:
+      # "context: ./app" means the Dockerfile and build context are in the ./app directory
+      context: ./app
+    # "depends_on:" means this container won't start until the database container is running first
+    depends_on:
+      # We need the database to be ready before the app tries to connect to it
+      - todo-database
+    # "environment:" sets environment variables inside the container — like setting a config option
+    environment:
+      # "NODE_ENV: production" tells Node.js to run in production mode (optimized for speed and security)
+      NODE_ENV: production
+    # "ports:" maps ports from your computer (host) to the container — so you can access the app in your browser
+    ports:
+      # "3000:3000" means port 3000 on your computer forwards to port 3000 inside the container
+      - 3000:3000
+      # "35729:35729" is for LiveReload — automatically refreshes the browser when you change code
+      - 35729:35729
+    # "develop:" configures features for development (not used in production)
+    develop:
+      # "watch:" tells Docker Compose Watch to monitor files and auto-update the container when you edit code
+      watch:
+        # When package.json changes, rebuild the entire container (to install new dependencies)
+        - path: ./app/package.json
+          action: rebuild
+        # When any file in ./app changes, sync (copy) it into the container instead of rebuilding
+        - path: ./app
+          # "target: /usr/src/app" is where inside the container the files get copied to
+          target: /usr/src/app
+          action: sync
+
+  # "todo-database:" defines our MongoDB database container
+  todo-database:
+    # "image: mongo:6" pulls the official MongoDB version 6 image from Docker Hub
+    image: mongo:6
+    #volumes: 
+    #  - database:/data/db
+    # "ports:" exposes the database port so you can connect to it from outside the container (for debugging)
+    ports:
+      # "27017:27017" maps MongoDB's default port (27017) from the container to your computer
+      - 27017:27017
+
+#volumes:
+  #database:
