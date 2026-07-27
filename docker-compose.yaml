@@ -1,0 +1,12 @@
+# "version: '3.8'" specifies the Docker Compose file format version — 3.8 is a stable version with good feature support
+version: '3.8'
+# "services:" tells Docker Compose about all the containers (services) this project uses
+services:
+  # "web:" defines a service named "web" — this is a simple Nginx web server
+  web:
+    # "image: nginx" pulls the official Nginx image from Docker Hub — Nginx is a fast, lightweight web server
+    image: nginx
+    # "ports:" maps ports from your computer to the container — so you can access the web server in your browser
+    ports:
+      # "80:80" means port 80 on your computer forwards to port 80 inside the container (HTTP default port)
+      - "80:80"
