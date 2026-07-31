@@ -49,10 +49,16 @@ services:
     image: mongo:6
     #volumes: 
     #  - database:/data/db
+    # "volumes:" mounts a persistent storage location so data survives container restarts
+    volumes:
+      # "database:/data/db" maps the named volume "database" to MongoDB's default data directory
+      - database:/data/db
     # "ports:" exposes the database port so you can connect to it from outside the container (for debugging)
     ports:
       # "27017:27017" maps MongoDB's default port (27017) from the container to your computer
       - 27017:27017
 
-#volumes:
-  #database:
+# "volumes:" declares named volumes that Docker manages
+volumes:
+  # "database:" creates a persistent volume that MongoDB writes to — data survives container restarts
+  database:

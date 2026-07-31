@@ -72,8 +72,8 @@
 /* Linkedin */
 /* ".fa-linkedin" styles specifically the LinkedIn icon */
 .fa-linkedin {
-  /* "background: #55acee" gives LinkedIn the same blue background (could be changed to LinkedIn's actual blue #0077B5) */
-  background: #55acee;
+  /* "background: #0077B5" is LinkedIn's official brand blue */
+  background: #0077B5;
   /* "color: white" makes the LinkedIn symbol white */
   color: white;
 }
@@ -81,8 +81,8 @@
 /* Reddit */
 /* ".fa-reddit" styles specifically the Reddit icon */
 .fa-reddit {
-  /* "background: #55acee" gives Reddit the same blue background (could be changed to Reddit's actual orange #FF5700) */
-  background: #55acee;
+  /* "background: #FF5700" is Reddit's official brand orange */
+  background: #FF5700;
   /* "color: white" makes the Reddit symbol white */
   color: white;
 }

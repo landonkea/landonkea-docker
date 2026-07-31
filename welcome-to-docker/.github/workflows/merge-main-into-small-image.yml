@@ -1,25 +1,49 @@
+# ── GitHub Actions workflow: auto-merge main into small-image ────
+# Whenever a pull request targeting the "main" branch is closed
+# (merged or not), this workflow runs.  If the PR was actually
+# merged, it merges main into the "small-image" branch.
+
 name: merge-main-into-small-image.yml
+
+# "on:" defines which GitHub events trigger this workflow
 on:
+  # "pull_request:" runs when something happens to a pull request
   pull_request:
+    # "branches:" limits this trigger to PRs targeting "main"
     branches:
-      - main   
+      - main
+    # "types: [closed]" means this only fires when the PR is closed
     types:
       - closed
+
+# "jobs:" defines one or more tasks that run on GitHub's servers
 jobs:
+  # "merge-main-into-small-image:" is the name of this job
   merge-main-into-small-image:
+    # "runs-on:" defines the operating system for the runner
     runs-on: ubuntu-latest
+    # "if:" is a condition — only run this job if the PR was merged
+    # (not just closed without merging).  The event payload contains
+    # github.event.pull_request.merged which is true/false.
     if: github.event.pull_request.merged == true
+    # "timeout-minutes:" prevents the job from running forever
     timeout-minutes: 3
-    
+
+    # "steps:" lists the commands to execute in order
     steps:
-    - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      with:
-        fetch-depth: 0
-    - name: Merge with main
-      run: |
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git fetch
-        git checkout small-image
-        git merge main --no-ff --no-edit
-        git push origin small-image
+      # "actions/checkout" clones the repository into the runner
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          # "fetch-depth: 0" gets the full Git history (needed for merge)
+          fetch-depth: 0
+      # "Merge with main:" merges main into the small-image branch
+      - name: Merge with main
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git fetch
+          git checkout small-image
+          # "--no-ff" forces a merge commit even if a fast-forward is possible
+          # "--no-edit" uses the default merge message
+          git merge main --no-ff --no-edit
+          git push origin small-image

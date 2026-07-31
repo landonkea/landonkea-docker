@@ -38,8 +38,9 @@ const App = () => {
               "&url=" +
               shareLink
             }
-            // "class='fa-brands fa-x-twitter'" applies Font Awesome icon styling for the X (Twitter) logo
-            class="fa-brands fa-x-twitter"
+            // "className='fa-brands fa-x-twitter'" applies Font Awesome icon styling for the X (Twitter) logo
+            // React uses "className" instead of "class" because "class" is a reserved word in JavaScript
+            className="fa-brands fa-x-twitter"
             rel="noopener noreferrer"
           >
             {" "}
@@ -52,7 +53,8 @@ const App = () => {
               "https://www.linkedin.com/sharing/share-offsite/?url=" + shareLink
             }
             // "fa-brands fa-linkedin" shows the LinkedIn icon from Font Awesome
-            class="fa-brands fa-linkedin"
+            // React uses "className" instead of "class" — see note above
+            className="fa-brands fa-linkedin"
             rel="noopener noreferrer"
           >
             {" "}
@@ -68,7 +70,8 @@ const App = () => {
               shareLink
             }
             // "fa-brands fa-reddit" shows the Reddit icon from Font Awesome
-            class="fa-brands fa-reddit"
+            // React uses "className" instead of "class" — see note above
+            className="fa-brands fa-reddit"
             rel="noopener noreferrer"
           >
             {" "}

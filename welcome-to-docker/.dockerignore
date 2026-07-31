@@ -1,1 +1,15 @@
-node_modules
+# ── .dockerignore — what NOT to copy into the Docker image ───────
+# This file is like .gitignore but for Docker builds.
+# Every pattern listed here is excluded from the build context,
+# making the image smaller, faster, and more secure.
+
+node_modules      # npm dependencies (installed fresh inside the container)
+.git              # Git history (not needed to run the app)
+.gitignore        # Git rules file (not relevant inside the container)
+.env              # Environment variables / secrets (should not be in the image)
+*.log             # Log files from local development
+build/            # Build artifacts (the container builds fresh copies)
+dist/             # Distribution folder (same reason)
+.DS_Store         # macOS folder metadata file
+docker-compose*   # Compose files (not needed inside individual containers)
+Dockerfile*       # Dockerfiles (not needed inside the container itself)

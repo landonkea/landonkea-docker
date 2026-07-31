@@ -1,34 +1,33 @@
-# Include any files or directories that you don't want to be copied to your
-# container here (e.g., local build artifacts, temporary files, etc.).
-#
-# For more help, visit the .dockerignore file reference guide at
-# https://docs.docker.com/engine/reference/builder/#dockerignore-file
+# ── .dockerignore — what NOT to copy into the Docker image ───────
+# Every file/folder listed here is excluded from the Docker build
+# context.  This keeps images small, builds fast, and avoids leaking
+# secrets or local config into the container.
 
-**/.classpath
-**/.dockerignore
-**/.env
-**/.git
-**/.gitignore
-**/.project
-**/.settings
-**/.toolstarget
-**/.vs
-**/.vscode
-**/.next
-**/.cache
-**/*.*proj.user
-**/*.dbmdl
-**/*.jfm
-**/charts
-**/docker-compose*
-**/compose*
-**/Dockerfile*
-**/node_modules
-**/npm-debug.log
-**/obj
-**/secrets.dev.yaml
-**/values.dev.yaml
-**/build
-**/dist
-LICENSE
-README.md
+**/.classpath        # Eclipse IDE config (not needed at runtime)
+**/.dockerignore     # This file itself (don't copy it into the image)
+**/.env              # Environment variables / secrets (MUST NOT be in the image)
+**/.git              # Git repository history (bloats image size)
+**/.gitignore        # Git rules file (not relevant inside the container)
+**/.project          # Eclipse project file (IDE-specific)
+**/.settings         # Eclipse settings (IDE-specific)
+**/.toolstarget      # IDE/editor target metadata
+**/.vs               # Visual Studio settings (Windows IDE)
+**/.vscode           # VS Code settings (IDE-specific)
+**/.next             # Next.js build output (not needed in production container)
+**/.cache            # npm/Yarn cache (wasted space in image)
+**/*.*proj.user      # Visual Studio per-user project settings
+**/*.dbmdl           # Database model files (design-time only)
+**/*.jfm             # Java modeling framework files
+**/charts            # Helm chart files (for Kubernetes, not for Docker build)
+**/docker-compose*   # Docker Compose files (belong on host, not inside containers)
+**/compose*          # Also ignore compose*.yaml variants
+**/Dockerfile*       # Dockerfiles themselves (belong on host, not in the image)
+**/node_modules      # npm dependencies (reinstalled fresh inside the container)
+**/npm-debug.log     # Debug logs from local npm runs
+**/obj               # Compiled object files (C#/Java build artifacts)
+**/secrets.dev.yaml  # Local development secrets (MUST NOT leak into image)
+**/values.dev.yaml   # Local Helm values (development-specific config)
+**/build             # Build output directory (compiled/bundled files)
+**/dist              # Distribution directory (same as build — fresh copy in container)
+LICENSE              # License file (not needed at runtime)
+README.md            # Documentation (not needed at runtime)

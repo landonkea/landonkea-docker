@@ -1,2 +1,4 @@
-app/node_modules
-.vscode
+# ── Git ignore rules for multi-container-app ─────────────────────
+
+app/node_modules   # npm dependencies installed by the app (not committed)
+.vscode            # VS Code editor settings (per-machine, not shared)
