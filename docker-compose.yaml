@@ -1,5 +1,6 @@
-# "version: '3.8'" specifies the Docker Compose file format version — 3.8 is a stable version with good feature support
-version: '3.8'
+# NOTE: The old "version: '3.8'" attribute is intentionally omitted.
+# Compose file format is now auto-detected by `docker compose`
+# (the `version` key is obsolete and generates a warning).
 # "services:" tells Docker Compose about all the containers (services) this project uses
 services:
   # "web:" defines a service named "web" — this is a simple Nginx web server
