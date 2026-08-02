@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-compose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: YAML syntax check (fallback/extra check)
+        run: |
+          pip install --quiet pyyaml
+          python3 -c "
+          import sys, glob, yaml
+          files = glob.glob('**/docker-compose*.y*ml', recursive=True) + glob.glob('**/compose.y*ml', recursive=True)
+          files = sorted(set(files))
+          if not files:
+              sys.exit('No compose files found')
+          for f in files:
+              print(f'Checking {f}')
+              with open(f) as fh:
+                  yaml.safe_load(fh)
+          print(f'{len(files)} compose file(s) are well-formed YAML')
+          "
+
+      - name: Validate compose files with docker compose config
+        run: |
+          set -e
+          files=$(find . -type f \( -name 'docker-compose*.yaml' -o -name 'docker-compose*.yml' -o -name 'compose.yaml' -o -name 'compose.yml' \) | sort)
+          if [ -z "$files" ]; then
+            echo "No compose files found" >&2
+            exit 1
+          fi
+          for f in $files; do
+            echo "Validating $f"
+            docker compose -f "$f" config > /dev/null
+          done
