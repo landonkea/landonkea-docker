@@ -1,11 +1,11 @@
-// "import Particles" loads the main React component from react-particles — it renders the particle animation
+// "import Particles" loads the main React component from react-particles, it renders the particle animation
 import Particles from "react-particles";
-// "useCallback" is a React hook that memoizes (caches) a function so it doesn't get recreated on every render — keeps things fast
+// "useCallback" is a React hook that memoizes (caches) a function so it doesn't get recreated on every render, keeps things fast
 import { useCallback } from "react";
-// "loadFull" loads the complete tsparticles library with all features — needed for the confetti to work
+// "loadFull" loads the complete tsparticles library with all features, needed for the confetti to work
 import { loadFull } from "tsparticles";
 
-// "const Confetti = () =>" defines a React functional component — this entire file creates the confetti effect
+// "const Confetti = () =>" defines a React functional component, this entire file creates the confetti effect
 const Confetti = () => {
 
     // "particlesInit" runs once when the particles engine is first created
@@ -17,7 +17,7 @@ const Confetti = () => {
         // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
         // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
         // starting from v2 you can add only the features you need reducing the bundle size
-        // "await loadFull(engine)" loads all tsparticles features — it's async so we wait for it to finish
+        // "await loadFull(engine)" loads all tsparticles features, it's async so we wait for it to finish
         await loadFull(engine);
         // "}, []" closes useCallback and the empty array means this function is created only once
     }, []);
@@ -25,7 +25,7 @@ const Confetti = () => {
     // "particlesLoaded" runs after all particles have been created and added to the screen
     // It receives the particle container object
     const particlesLoaded = useCallback(async container => {
-        // Logs the container to the console — useful for debugging to confirm particles loaded
+        // Logs the container to the console, useful for debugging to confirm particles loaded
         await console.log(container);
         // "}, []" means this callback is also created only once
     }, []);
@@ -34,9 +34,9 @@ const Confetti = () => {
     return (
         // "<Particles>" is the main component that renders the canvas for the animation
         <Particles
-            // "id='tsparticles'" gives the component a unique HTML ID — tsparticles uses this to find the container
+            // "id='tsparticles'" gives the component a unique HTML ID, tsparticles uses this to find the container
             id="tsparticles"
-            // "init" passes the initialization function — called once when the engine starts
+            // "init" passes the initialization function, called once when the engine starts
             init={particlesInit}
             // "loaded" passes the callback for when particles are done loading
             loaded={particlesLoaded}
@@ -47,7 +47,7 @@ const Confetti = () => {
                 fullScreen: {
                     zIndex: 1
                 },
-                // "emitters" are the sources that shoot out particles — we have two: one from the left, one from the right
+                // "emitters" are the sources that shoot out particles, we have two: one from the left, one from the right
                 emitters: [
                     {
                         // "position: { x: 0, y: 30 }" places this emitter at the left edge (x=0%) and 30% down from the top
@@ -120,7 +120,7 @@ const Confetti = () => {
                         direction: "top",
                         // "enable: true" turns on particle movement (without this, particles would just sit still)
                         enable: true,
-                        // "gravity" pulls particles downward over time — making them arc and fall like real confetti
+                        // "gravity" pulls particles downward over time, making them arc and fall like real confetti
                         gravity: {
                             // "enable: true" turns on gravity so particles fall after their initial burst
                             "enable": true
@@ -131,7 +131,7 @@ const Confetti = () => {
                             // "default: 'destroy'" deletes particles that leave the screen (frees up memory)
                             default: "destroy"
                         },
-                        // "speed" controls how fast particles move — each particle gets a random speed in this range
+                        // "speed" controls how fast particles move, each particle gets a random speed in this range
                         speed: {
                             min: 10,
                             max: 50
@@ -139,12 +139,12 @@ const Confetti = () => {
                     },
                     // "number" controls how many particles exist on screen at once
                     number: {
-                        // "value: 0" means start with zero particles — the emitters will add them over time
+                        // "value: 0" means start with zero particles, the emitters will add them over time
                         value: 0
                     },
                     // "opacity" controls the transparency of particles
                     opacity: {
-                        // "value: 1" means fully opaque (not see-through at all) — 0 would be invisible
+                        // "value: 1" means fully opaque (not see-through at all), 0 would be invisible
                         value: 1
                     },
                     // "rotate" makes each particle spin around its own center
@@ -163,7 +163,7 @@ const Confetti = () => {
                             speed: 30
                         }
                     },
-                    // "tilt" makes particles wobble/tilt back and forth — adds a tumbling effect
+                    // "tilt" makes particles wobble/tilt back and forth, adds a tumbling effect
                     tilt: {
                         direction: "random",
                         enable: true,
@@ -196,27 +196,27 @@ const Confetti = () => {
                             sync: true
                         }
                     },
-                    // "roll" makes particles rotate in 3D space — like a coin rolling on a table
+                    // "roll" makes particles rotate in 3D space, like a coin rolling on a table
                     roll: {
-                        // "darken" makes the particle darker on one side as it rolls — creates a 3D shadow effect
+                        // "darken" makes the particle darker on one side as it rolls, creates a 3D shadow effect
                         darken: {
                             enable: true,
                             // "value: 25" darkens the shadowed side by 25%
                             value: 25
                         },
                         enable: true,
-                        // "speed" controls how fast the rolling animation plays — each particle gets a random speed
+                        // "speed" controls how fast the rolling animation plays, each particle gets a random speed
                         speed: {
                             min: 5,
                             max: 15
                         }
                     },
-                    // "wobble" makes particles sway side to side — like a leaf falling in the wind
+                    // "wobble" makes particles sway side to side, like a leaf falling in the wind
                     wobble: {
                         // "distance: 30" controls how far the particle sways left and right (in pixels)
                         distance: 30,
                         enable: true,
-                        // "speed" controls how fast the wobble happens — negative values reverse the direction
+                        // "speed" controls how fast the wobble happens, negative values reverse the direction
                         speed: {
                             min: -7,
                             max: 7
@@ -251,5 +251,5 @@ const Confetti = () => {
     );
 }
 
-// "export default Confetti" makes this component available for import in other files — App.js imports it to show confetti
+// "export default Confetti" makes this component available for import in other files, App.js imports it to show confetti
 export default Confetti;

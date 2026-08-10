@@ -1,16 +1,16 @@
-// Load Express — we need it to create a router
+// Load Express, we need it to create a router
 const express = require('express');
-// Load the Todo model — this lets us create, find, and delete tasks in the database
+// Load the Todo model, this lets us create, find, and delete tasks in the database
 const Todo = require('./../models/Todo');
 
-// "express.Router()" creates a router object — think of it as a mini-app that handles specific routes
+// "express.Router()" creates a router object, think of it as a mini-app that handles specific routes
 const router = express.Router();
 
 // Home page route
 // "router.get('/')" handles GET requests to the home page (what happens when you visit localhost:3000/)
 router.get('/', async (req, res) => {
 
-    // "async/await" lets us wait for the database query to finish — "Todo.find()" fetches ALL tasks from MongoDB
+    // "async/await" lets us wait for the database query to finish, "Todo.find()" fetches ALL tasks from MongoDB
     const todos = await Todo.find()
     // "res.render('todos')" tells Express to render the todos.ejs template file and send it to the browser
     res.render("todos", {
@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST - Submit Task
-// "router.post('/')" handles POST requests — this runs when the user submits the "Add Task" form
+// "router.post('/')" handles POST requests, this runs when the user submits the "Add Task" form
 router.post('/', (req, res) => {
     // Create a new Todo document with the task text from the form input named "task"
     const newTask = new Todo({
@@ -49,5 +49,5 @@ router.post('/todo/destroy', async (req, res) => {
 });
 
 
-// "module.exports" makes this router available to other files — server.js imports it to use these routes
+// "module.exports" makes this router available to other files, server.js imports it to use these routes
 module.exports = router;

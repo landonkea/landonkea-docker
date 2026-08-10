@@ -1,15 +1,15 @@
-// Load mongoose — we need it to define a database schema/model
+// Load mongoose, we need it to define a database schema/model
 const mongoose = require('mongoose');
-// "Schema" is a shortcut — instead of typing "mongoose.Schema" every time, we can just type "Schema"
+// "Schema" is a shortcut, instead of typing "mongoose.Schema" every time, we can just type "Schema"
 const Schema = mongoose.Schema;
 
-// "new Schema" defines the structure of a Todo document — what fields it has and what data types they are
+// "new Schema" defines the structure of a Todo document, what fields it has and what data types they are
 const TodoSchema = new Schema({
     // "task" is the field name for the task description text
     task: {
         // "type: String" means this field stores text (a string of characters)
         type: String,
-        // "required: true" means every task MUST have a task description — it can't be empty
+        // "required: true" means every task MUST have a task description, it can't be empty
         required: true
     },
     // "created_at" stores the date and time when the task was created
@@ -22,5 +22,5 @@ const TodoSchema = new Schema({
 });
 
 // "mongoose.model('todos', TodoSchema)" creates a model called "Todo" that maps to the "todos" collection in MongoDB
-// "module.exports" makes this model available to other files — routes use it to interact with the database
+// "module.exports" makes this model available to other files, routes use it to interact with the database
 module.exports = Todo = mongoose.model('todos', TodoSchema);

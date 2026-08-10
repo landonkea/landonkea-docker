@@ -1,4 +1,4 @@
-# landonkea-docker — Design & Workflow
+# landonkea-docker - Design & Workflow
 
 ## High-Level Overview
 
