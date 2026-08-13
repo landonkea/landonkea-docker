@@ -1,0 +1,42 @@
+name: Release
+
+# Runs only when a tag matching v* is pushed, e.g. v1.0.0 or v1.1.0-beta.1
+# Pushing commits to main does not trigger this, only `git tag` + `git push --tags`.
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  publish-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Decide pre-release vs stable from the tag name
+        id: channel
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          if [[ "$TAG" =~ -(alpha|beta|rc)([.-]?[0-9]+)?$ ]]; then
+            echo "Tag '$TAG' looks like a pre-release (matched -alpha/-beta/-rc)."
+            echo "prerelease_flag=--prerelease" >> "$GITHUB_OUTPUT"
+            echo "channel=pre-release" >> "$GITHUB_OUTPUT"
+          else
+            echo "Tag '$TAG' looks like a stable release."
+            echo "prerelease_flag=" >> "$GITHUB_OUTPUT"
+            echo "channel=stable" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create the GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            --title "${GITHUB_REF_NAME} (${{ steps.channel.outputs.channel }})" \
+            --generate-notes \
+            ${{ steps.channel.outputs.prerelease_flag }}
